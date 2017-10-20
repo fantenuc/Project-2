@@ -1,7 +1,7 @@
 ## SI 206 W17 - Project 2
 
 ## COMMENT HERE WITH:
-## Your name: Francesca Antenucci
+## Your name: Francesca Antenucci   
 ## Anyone you worked with on this project: Alexander Shell
 
 ## Below we have provided import statements, comments to separate out the 
@@ -27,10 +27,10 @@ from bs4 import BeautifulSoup
 ## find_urls("the internet is awesome #worldwideweb") should return [], empty list
 
 def find_urls(s):
-    url = re.findall('http[s]?://[A-Za-z0-9]+\.\S{2,}', s)
-    # url = re.findall('http[s]?://[A-Za-z0-9]+\.[A-Za-z0-9./]{2,}', s)
+    url = re.findall('http[s]?://\S*\.\S{2,}', s)
     # print(url)
     return url
+
 
 
 ## PART 2  - Define a function grab_headlines.
@@ -39,23 +39,21 @@ def find_urls(s):
 ## http://www.michigandaily.com/section/opinion
 
 def grab_headlines():
-    
       ## Saved Opinion File ##
     f = open('opinion.html', 'r')
     html_file = f.read()
     soup = BeautifulSoup(html_file, 'html.parser')
-    
+
       ## Real Michigan Daily Data ##
     # url = 'http://www.michigandaily.com/section/opinion'
     # html = requests.get(url)  
     # soup = BeautifulSoup(html.content, 'html.parser')    
-    
+
     # print(soup.prettify())
     tags = soup('ol')
     for header in tags:
         headers = header.text.strip().split('\n')
     return headers
-    
 
 
 
@@ -108,10 +106,6 @@ def main():
 
 
     print('\n\nTask 2: Michigan Daily')
-    
-      ## Test created for October 19 ##
-    # total += test(grab_headlines(),["Students attempt to shut down speech by controversial social scientist Charles Murray", "Orion Sang: Michigan should see what it has with Peters", "Protesters grapple with Charles Murray's appearance on campus", "'Lil Pump' delivers hype despite a lack of substance", "'Jane the Virgin' becomes Adam the Virgo in season 4 shift"],50)
-    
     total += test(grab_headlines(),["MSW students protest staff member's email based on religious bias", 'Teen arrested at Blake Transit Center', "Racist flyers calling to 'Make America White Again' found near Stockwell", "Protesters take to LSA SG panel on C.C. Little's renaming", 'Michigan football player Nate Johnson arrested for domestic violence'],50)
 
 
